@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block title %}상품 목록{% endblock %} {% block content %}
+<h2>상품 목록</h2>
+<table>
+    <tr>
+        <th>상품명</th>
+        <th>가격</th>
+        <th>Blocked</th>
+        <th>관리</th>
+    </tr>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.title }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.blocked }}</td>
+        <td>
+            <form method="post" action="{{ url_for('block_product', product_id=product.id) }}">
+                <button type="submit">{% if product.blocked %}차단 해제{% else %}차단{% endif %}</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %} {% block title %}사용자 목록{% endblock %} {% block content %}
+<h2>사용자 목록</h2>
+<table>
+    <tr>
+        <th>사용자명</th>
+        <th>Blocked</th>
+        <th>관리</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.blocked }}</td>
+        <td>
+            <form method="post" action="{{ url_for('block_user', user_id=user.id) }}">
+                <button type="submit">{% if user.blocked %}차단 해제{% else %}차단{% endif %}</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
